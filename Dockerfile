@@ -1,19 +1,21 @@
-FROM node:12-alpine
-
-# Create app directory
+FROM node:12-alpine AS build
 WORKDIR /test-ubisoft-app
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+COPY package.json ./
+COPY package-lock.json ./
+RUN ["npm", "install"]
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+COPY ./src ./src
+COPY tsconfig.json ./
+COPY angular.json ./
+RUN npm install -g @angular/cli 
+RUN ["ng", "build"]
 
-# Bundle app source
-COPY . .
+FROM nginx
+WORKDIR /test-ubisoft-app
 
-# start app
-CMD ng serve --host 0.0.0.0
+COPY default.conf.template /etc/nginx/conf.d/default.conf.template
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /test-ubisoft-app/dist /usr/share/nginx/html
+
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

@@ -11,6 +11,7 @@ import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.compon
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from "./app-routing.module";
+import { SocketsService } from './services/socket.service';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { AppRoutingModule } from "./app-routing.module";
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, AdminLayoutComponent],
-  providers: [],
+  providers: [SocketsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

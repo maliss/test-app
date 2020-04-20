@@ -6,16 +6,21 @@ import { webSocket } from "rxjs/webSocket";
 export class SocketsService {
     ws: any;
     dataSub: Subject<any>;
+    socketsServiceSub: Subject<any>;
   
     constructor() {
       this.initConnection();
     }
+
+    public stop() {
+      this.socketsServiceSub.unsubscribe();
+    }
   
     public initConnection() {
         this.dataSub = new Subject<any>();
-        const subject = webSocket("ws://localhost:8999");
+        this.socketsServiceSub =  webSocket("ws://localhost:8999");
 
-        subject.subscribe(
+        this.socketsServiceSub.subscribe(
            (data: string) => this.dataSub.next(data),
            error => this.dataSub.error(error)
         );
