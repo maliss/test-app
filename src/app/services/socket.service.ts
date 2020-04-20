@@ -11,7 +11,6 @@ export class SocketsService {
   
     constructor() {
       this.initConnection();
-      alert(environment.production);
     }
 
     public stop() {
@@ -19,8 +18,10 @@ export class SocketsService {
     }
   
     public initConnection() {
+        const webSocketUrl = environment.production ? "test-ubisoft-server.herokuapp.com/" : "localhost:8999";
+
         this.dataSub = new Subject<any>();
-        this.socketsServiceSub =  webSocket("ws://localhost:8999");
+        this.socketsServiceSub =  webSocket(`ws://${webSocketUrl}`);
 
         this.socketsServiceSub.subscribe(
            (data: string) => this.dataSub.next(data),
