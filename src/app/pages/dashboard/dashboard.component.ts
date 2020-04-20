@@ -48,6 +48,8 @@ export class DashboardComponent implements OnInit {
     this.initChart();
     this.socketsServiceSub = this.socketsService.dataSub.subscribe((gameData: IGamedata) => {
 
+      console.log('gameData', gameData);
+
       this.statistics[gameData.gameId] = {
         gameId: gameData.gameId,
         name: gameData.name,
