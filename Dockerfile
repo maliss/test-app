@@ -9,7 +9,7 @@ COPY ./src ./src
 COPY tsconfig.json ./
 COPY angular.json ./
 RUN npm install -g @angular/cli 
-RUN ["ng", "build"]
+RUN ["ng", "build" , "--configuration=production"]
 
 FROM nginx
 WORKDIR /test-ubisoft-app
