@@ -1,6 +1,7 @@
 import { Subject, Observable, Observer } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
 import { webSocket } from "rxjs/webSocket";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class SocketsService {
@@ -10,6 +11,7 @@ export class SocketsService {
   
     constructor() {
       this.initConnection();
+      alert(environment.production);
     }
 
     public stop() {
