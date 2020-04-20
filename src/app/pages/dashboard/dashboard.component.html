@@ -1,0 +1,34 @@
+
+<div class=" content">
+  <div class=" row">
+    <div class=" col-12">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <div class=" row">
+            <div class=" col-sm-12 text-left">
+              <h5 class=" card-category">Total views per game</h5>
+              <h2 class=" card-title">Performance</h2>
+            </div>
+          </div>
+        </div>
+        <div class=" card-body">
+          <div class=" chart-area"><canvas id="chartBig1"> </canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class=" row">
+    <div *ngFor="let statistic of statistics | keyvalue" class=" col-lg-4">
+      <div class=" card card-chart">
+        <div class=" card-header">
+          <h2 class=" card-category card-category-title">{{statistic.value.name}}</h2>
+          <img src={{statistic.value.boxArt}} />
+          <h3 class=" card-title card-title-small">
+            <i class=" tim-icons icon-bell-55 text-danger-states"> </i> <span>{{statistic.value.viewCount[statistic.value.viewCount.length - 1]}} views for {{statistic.value.numberStreamers}} streamers</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
