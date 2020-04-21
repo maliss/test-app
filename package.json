@@ -14,7 +14,7 @@
     "deploy": "git push heroku master"
   },
   "repository": {
-    "type": "git",
+    "type": "git"
   },
   "author": "Billy Rancourt",
   "license": "MIT",
