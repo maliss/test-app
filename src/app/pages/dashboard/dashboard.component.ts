@@ -31,8 +31,9 @@ export class DashboardComponent implements OnInit {
   public ctx;
   public myChart;
   public socketsService : SocketsService;
-  private socketsServiceSub = Subscription.EMPTY;
+  public socketsServiceSub = Subscription.EMPTY;
   public statistics: StatisticsKeys = {};
+  public rainbowSixGameId: string = "460630";
 
   constructor(socketsService:SocketsService) {
     this.socketsService = socketsService;
@@ -48,8 +49,6 @@ export class DashboardComponent implements OnInit {
     this.initChart();
     this.socketsServiceSub = this.socketsService.dataSub.subscribe((gameData: IGamedata) => {
 
-      console.log('gameData', gameData);
-
       this.statistics[gameData.gameId] = {
         gameId: gameData.gameId,
         name: gameData.name,
@@ -58,10 +57,11 @@ export class DashboardComponent implements OnInit {
         boxArt: gameData.boxArt.replace("{width}x{height}", "144x192")
       };
 
-      this.addChartData(this.statistics[gameData.gameId]);
+      this.updateChartData(this.statistics[gameData.gameId]);
     });
   }
 
+  // Init Chart
   private initChart = () => {
     this.canvas = document.getElementById("chartBig1");
     this.ctx = this.canvas.getContext("2d");
@@ -69,7 +69,8 @@ export class DashboardComponent implements OnInit {
     this.myChart = new Chart(this.ctx, chartConfig);
   }
 
-  private addChartData = (currentStatistic: IStatistic) => {
+  // Update Chart with the current value from the websocket
+  private updateChartData = (currentStatistic: IStatistic) => {
     const chart = this.myChart;
 
     if (chart.data.datasets.length === 0) {

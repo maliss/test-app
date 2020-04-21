@@ -11,11 +11,18 @@
         margin-top: 15px;
         font-size: 15px;
       }
+      &.highlight {
+        color: #fb6340
+      }
     }
     .card-category{
       margin-bottom: 5px;
       &.card-category-title {
         font-size: 18px;
+      }
+
+      &.highlight {
+        color: #fb6340
       }
     }
   }

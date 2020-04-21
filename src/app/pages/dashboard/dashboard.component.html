@@ -21,9 +21,9 @@
     <div *ngFor="let statistic of statistics | keyvalue" class=" col-lg-4">
       <div class=" card card-chart">
         <div class=" card-header">
-          <h2 class=" card-category card-category-title">{{statistic.value.name}}</h2>
+          <h2 [ngClass]="{'highlight' : statistic.value.gameId == rainbowSixGameId}" class=" card-category card-category-title">{{statistic.value.name}}</h2>
           <img src={{statistic.value.boxArt}} />
-          <h3 class=" card-title card-title-small">
+          <h3 [ngClass]="{'highlight' : statistic.value.gameId == rainbowSixGameId}"  class=" card-title card-title-small">
              <span>{{statistic.value.viewCount[statistic.value.viewCount.length - 1]}} views for {{statistic.value.numberStreamers}} streamers</span>
           </h3>
         </div>
