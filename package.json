@@ -10,11 +10,11 @@
     "lint": "ng lint",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "docker:build": "docker build -t test-ubisoft-app .",
-    "docker:run": "docker run -p 4200:4200 -e PORT=4200 -d test-ubisoft-app"
+    "docker:run": "docker run -p 4200:4200 -e PORT=4200 -d test-ubisoft-app",
+    "deploy": "git push heroku master"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/black-dashboard-angular.git"
   },
   "author": "Billy Rancourt",
   "license": "MIT",
